@@ -21,6 +21,7 @@ import acme.client.components.views.SelectChoices;
 import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.activityLog.ActivityLog;
 import acme.entities.flightAssignment.Duty;
 import acme.entities.flightAssignment.FlightAssignment;
 import acme.entities.flightAssignment.StatusAssignment;
@@ -73,9 +74,9 @@ public class FlightCrewMemberAssignmentFlightDeleteService extends AbstractGuiSe
 	@Override
 	public void perform(final FlightAssignment object) {
 		assert object != null;
-
+		Collection<ActivityLog> logs = this.repository.findAllActivityLogsByAssignmentId(object.getId());
+		this.repository.deleteAll(logs);
 		this.repository.delete(object);
-		;
 	}
 
 	@Override

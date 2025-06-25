@@ -4,6 +4,7 @@ package acme.features.flightCrewMember.activityLog;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
+import acme.client.helpers.MomentHelper;
 import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
@@ -50,6 +51,7 @@ public class FlightCrewMemberActivityLogCreateService extends AbstractGuiService
 
 		activityLog = new ActivityLog();
 		activityLog.setAssignment(flightAssignment);
+		activityLog.setMoment(MomentHelper.getCurrentMoment());
 		activityLog.setDraftMode(true);
 
 		super.getBuffer().addData(activityLog);
