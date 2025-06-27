@@ -78,6 +78,7 @@ public class FlightCrewMemberActivityLogCreateService extends AbstractGuiService
 	@Override
 	public void perform(final ActivityLog object) {
 		assert object != null;
+		object.setMoment(MomentHelper.getCurrentMoment());
 		object.setId(0);
 		this.repository.save(object);
 

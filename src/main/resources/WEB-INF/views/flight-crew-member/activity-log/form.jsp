@@ -4,7 +4,7 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>
-		<acme:input-moment code="flight-crew-member.activity-log.form.label.moment" path="moment"/>
+		<acme:input-moment code="flight-crew-member.activity-log.form.label.moment" path="moment" readonly="true"/>
 		<acme:input-textbox code="flight-crew-member.activity-log.form.label.type" path="logType"/>
 		<acme:input-textbox code="flight-crew-member.activity-log.form.label.description" path="description"/>
 		<acme:input-textbox code="flight-crew-member.activity-log.form.label.severityLevel" path="severityLevel"/>

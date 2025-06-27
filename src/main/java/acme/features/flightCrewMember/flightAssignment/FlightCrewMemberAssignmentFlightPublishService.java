@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
@@ -118,6 +119,7 @@ public class FlightCrewMemberAssignmentFlightPublishService extends AbstractGuiS
 	public void perform(final FlightAssignment object) {
 		assert object != null;
 		object.setDraftMode(false);
+		object.setLastUpdate(MomentHelper.getCurrentMoment());
 		this.repository.save(object);
 	}
 
