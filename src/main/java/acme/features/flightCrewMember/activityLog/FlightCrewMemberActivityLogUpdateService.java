@@ -1,11 +1,10 @@
 
 package acme.features.flightCrewMember.activityLog;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
+import acme.client.helpers.MomentHelper;
 import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
@@ -53,11 +52,13 @@ public class FlightCrewMemberActivityLogUpdateService extends AbstractGuiService
 
 	@Override
 	public void validate(final ActivityLog object) {
-		if (object.getMoment() != null) {
-			Date dateFlightAssignment = this.repository.findFlightAssignmentById(object.getAssignment().getId()).getLastUpdate();
-			boolean correctMoments = object.getMoment().after(dateFlightAssignment);
-			super.state(correctMoments, "*", "acme.validation.activityLog.moment");
-		}
+		/*
+		 * if (object.getMoment() != null) {
+		 * Date dateFlightAssignment = this.repository.findFlightAssignmentById(object.getAssignment().getId()).getLastUpdate();
+		 * boolean correctMoments = object.getMoment().after(dateFlightAssignment);
+		 * super.state(correctMoments, "*", "acme.validation.activityLog.moment");
+		 * }
+		 */
 		/*
 		 * if (object.getAssignment() != null) {
 		 * boolean correctAssign = object.getAssignment().getStatus().equals(Status.LANDED);
@@ -69,6 +70,7 @@ public class FlightCrewMemberActivityLogUpdateService extends AbstractGuiService
 
 	@Override
 	public void perform(final ActivityLog object) {
+		object.setMoment(MomentHelper.getCurrentMoment());
 		this.repository.save(object);
 	}
 
