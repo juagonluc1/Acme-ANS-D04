@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import acme.client.repositories.AbstractRepository;
+import acme.entities.activityLog.ActivityLog;
 import acme.entities.flightAssignment.Duty;
 import acme.entities.flightAssignment.FlightAssignment;
 import acme.entities.leg.Leg;
@@ -57,4 +58,7 @@ public interface FlightCrewMemberFlightAssignmentRepository extends AbstractRepo
 
 	@Query("select count(a) > 0 from FlightAssignment a where a.member.id = :memberId and a.leg.id = :legId and a.id != :assignmentId and a.draftMode = false")
 	boolean existsAssignmentByMemberAndLeg(int memberId, int legId, int assignmentId);
+
+	@Query("SELECT al FROM ActivityLog al WHERE al.assignment.id = :id")
+	Collection<ActivityLog> findAllActivityLogsByAssignmentId(int id);
 }
