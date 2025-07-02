@@ -55,7 +55,8 @@ public class FlightCrewMemberActivityLogPublishService extends AbstractGuiServic
 	public void validate(final ActivityLog object) {
 		if (object.getMoment() != null) {
 			Date dateFlightAssignment = this.repository.findFlightAssignmentById(object.getAssignment().getId()).getLastUpdate();
-			boolean correctMoments = object.getMoment().after(dateFlightAssignment);
+			Date dateLeg = this.repository.findFlightAssignmentById(object.getAssignment().getId()).getLeg().getScheduledArrival();
+			boolean correctMoments = object.getMoment().after(dateFlightAssignment) && object.getMoment().after(dateLeg);
 			super.state(correctMoments, "*", "acme.validation.activityLog.moment");
 		}
 		assert object != null;
